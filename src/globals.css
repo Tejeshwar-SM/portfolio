@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 94% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 240 94% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 240 94% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 120 100% 54%; /* Neon teal #39ff14 */
+    --primary-foreground: 240 94% 8%;
+
+    --secondary: 324 100% 59%; /* Magenta #ff2d95 */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 240 30% 20%;
+    --muted-foreground: 210 10% 70%;
+
+    --accent: 41 97% 59%; /* Gold #fcd34d */
+    --accent-foreground: 240 94% 8%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 30% 25%;
+    --input: 240 30% 25%;
+    --ring: 120 100% 54%;
+
+    --radius: 0.5rem;
+
+    --glow-shadow: 0 0 8px 2px rgba(57, 255, 20, 0.7);
+    --magenta-glow: 0 0 8px 2px rgba(255, 45, 149, 0.7);
+  }
+
+  /* Custom cursor styles */
+  html {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2339ff14' stroke-width='1.5'><path d='M12 2v20M2 12h20'/></svg>") 12 12,
+    crosshair;
+  }
+
+  .cursor-pointer-hover:hover,
+  a:hover, button:hover,
+  [role="button"]:hover,
+  input[type="submit"]:hover,
+  input[type="button"]:hover {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28' fill='none'><circle cx='14' cy='14' r='6' stroke='%23ff2d95' stroke-width='2'/><path d='M14 2v24M2 14h24' stroke='%23ff2d95' stroke-width='1.5'/></svg>") 14 14,
+    pointer;
+    filter: brightness(1.2);
+    transform: scale(1.09);
+  }
+
+  .cursor-text,
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    cursor: text;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Roboto Mono', monospace;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Press Start 2P', cursive;
+    letter-spacing: -0.025em;
+    line-height: 1.4;
+  }
+
+  /* Scanline effect */
+  .scanlines {
+    position: relative;
+  }
+
+  .scanlines::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+            to bottom,
+            transparent 50%,
+            rgba(0, 0, 0, 0.05) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 50;
+  }
+}
+
+@layer components {
+  .retro-border {
+    @apply border-2 border-primary relative;
+    box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.3);
+  }
+
+  .retro-border::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border: 1px solid hsl(var(--primary));
+    opacity: 0.4;
+    z-index: -1;
+  }
+
+  .neon-text {
+    @apply text-primary;
+    text-shadow: 0 0 5px rgba(57, 255, 20, 0.7);
+  }
+
+  .magenta-text {
+    @apply text-secondary;
+    text-shadow: 0 0 5px rgba(255, 45, 149, 0.7);
+  }
+
+  .gold-text {
+    @apply text-accent;
+    text-shadow: 0 0 5px rgba(252, 211, 77, 0.5);
+  }
+
+  .pixel-corners {
+    clip-path: polygon(
+            0 4px, 4px 0, calc(100% - 4px) 0, 100% 4px,
+            100% calc(100% - 4px), calc(100% - 4px) 100%,
+            4px 100%, 0 calc(100% - 4px)
+    );
+  }
+}
