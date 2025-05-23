@@ -4,7 +4,7 @@ interface ScrollLinkProps {
     href: string;
     children: ReactNode;
     className?: string;
-    onClick?: () => void; // Added onClick property to fix TypeScript error
+    onClick?: () => void;
 }
 
 const ScrollLink = ({ href, children, className = '', onClick }: ScrollLinkProps) => {
