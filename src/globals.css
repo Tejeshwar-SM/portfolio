@@ -55,7 +55,7 @@
     cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28' fill='none'><circle cx='14' cy='14' r='6' stroke='%23ff2d95' stroke-width='2'/><path d='M14 2v24M2 14h24' stroke='%23ff2d95' stroke-width='1.5'/></svg>") 14 14,
     pointer;
     filter: brightness(1.2);
-    transform: scale(1.1);
+    transform: scale(1.1  );
   }
 
   .cursor-text,
