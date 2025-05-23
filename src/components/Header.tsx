@@ -1,77 +1,87 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import ScrollLink from './ScrollLink'
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
-  const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Contact', href: '#contact' }
-  ]
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-      <header className="sticky top-0 z-50 w-full backdrop-blur-sm bg-background/80">
-        <div className="container px-4 py-4 flex items-center justify-between">
-          <a
-              href="#home"
-              className="text-xl font-display neon-text"
-          >
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm">
+        {/* Removed border-b border-muted */}
+        <div className="container px-4 flex justify-between items-center h-16">
+          <ScrollLink href="#home" className="font-display text-xl neon-text">
             /dev
-          </a>
+          </ScrollLink>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
-            {navItems.map(item => (
-                <a
-                    key={item.name}
-                    href={item.href}
-                    className="text-sm font-medium transition-colors hover:text-primary"
-                >
-                  {item.name}
-                </a>
-            ))}
+          {/* Mobile menu toggle */}
+          <button
+              className="md:hidden p-2"
+              onClick={toggleMenu}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+
+          {/* Desktop navigation */}
+          <nav className="hidden md:flex items-center gap-6">
+            <ScrollLink href="#home" className="text-sm hover:text-primary transition">
+              Home
+            </ScrollLink>
+            <ScrollLink href="#projects" className="text-sm hover:text-primary transition">
+              Projects
+            </ScrollLink>
+            <ScrollLink href="#skills" className="text-sm hover:text-primary transition">
+              Skills
+            </ScrollLink>
+            <ScrollLink href="#contact" className="text-sm hover:text-primary transition">
+              Contact
+            </ScrollLink>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-              className="inline-flex items-center justify-center md:hidden"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
-          >
-            {isOpen ? (
-                <X className="h-6 w-6 text-primary" />
-            ) : (
-                <Menu className="h-6 w-6 text-primary" />
-            )}
-          </button>
+          {/* Mobile navigation */}
+          {isOpen && (
+              <motion.div
+                  className="absolute top-16 left-0 right-0 bg-card border-b border-border p-4 md:hidden"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+              >
+                <nav className="flex flex-col space-y-4">
+                  <ScrollLink
+                      href="#home"
+                      className="text-sm hover:text-primary transition py-2"
+                      onClick={() => setIsOpen(false)}
+                  >
+                    Home
+                  </ScrollLink>
+                  <ScrollLink
+                      href="#projects"
+                      className="text-sm hover:text-primary transition py-2"
+                      onClick={() => setIsOpen(false)}
+                  >
+                    Projects
+                  </ScrollLink>
+                  <ScrollLink
+                      href="#skills"
+                      className="text-sm hover:text-primary transition py-2"
+                      onClick={() => setIsOpen(false)}
+                  >
+                    Skills
+                  </ScrollLink>
+                  <ScrollLink
+                      href="#contact"
+                      className="text-sm hover:text-primary transition py-2"
+                      onClick={() => setIsOpen(false)}
+                  >
+                    Contact
+                  </ScrollLink>
+                </nav>
+              </motion.div>
+          )}
         </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-            <motion.div
-                className="md:hidden"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-            >
-              <div className="container px-4 pb-4 flex flex-col space-y-4 retro-border mt-2 mb-2 mx-4">
-                {navItems.map(item => (
-                    <a
-                        key={item.name}
-                        href={item.href}
-                        className="text-sm font-medium py-2 hover:text-primary"
-                        onClick={() => setIsOpen(false)}
-                    >
-                      {item.name}
-                    </a>
-                ))}
-              </div>
-            </motion.div>
-        )}
       </header>
   )
 }

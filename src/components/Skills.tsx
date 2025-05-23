@@ -33,7 +33,7 @@ const skillsData: SkillCategoryProps[] = [
         title: "DevOps & Tools",
         skills: [
             "Git & Version Control",
-            "Docker",
+            "Docker Containerization",
             "AWS Cloud (EC2/S3/CDN)",
             "Linux (Xubuntu)",
         ]
@@ -82,7 +82,7 @@ const SkillCategory = ({ category }: { category: SkillCategoryProps }) => {
 
 const Skills = () => {
     return (
-        <section id="skills" className="py-16 md:py-24 bg-card/30">
+        <section id="skills" className="py-16 md:py-36 bg-card/30">
             <div className="container px-4">
                 <motion.h2
                     className="text-2xl md:text-3xl font-display mb-12 text-center neon-text"
